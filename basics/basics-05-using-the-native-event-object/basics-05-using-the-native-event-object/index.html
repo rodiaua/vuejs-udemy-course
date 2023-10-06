@@ -24,8 +24,12 @@
       <!-- <input type="text" v-bind:value="name" v-on:input="setName"> -->
       <!-- v-modle = v-bind:value + v-on:input -->
       <input type="text" v-model="name">
+      <input type="text" v-model="lastName">
       <button v-on:click="resetName">Reset</button>
-      <p>Your Name: {{ name }}</p>
+      <!-- methods used in databinding will be exectued every time
+      any data property is updated which can lead to performance decrease -->
+      <!-- <p>Your Name: {{ outputFullName() }}</p> -->
+      <p>Your Name: {{ fullname }}</p>
     </section>
   </body>
 </html>
