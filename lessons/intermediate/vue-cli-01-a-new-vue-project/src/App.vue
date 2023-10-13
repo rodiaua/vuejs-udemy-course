@@ -1,8 +1,9 @@
 <template>
   <section>
     <header><h1>My friends</h1></header>
+    <new-friend @friend-added="addFriend"></new-friend>
     <ul>
-      <friend-contact v-for="friend in friends" :friend="friend" :key="friend.id" @toggle-favorite="toggleFavoriteStatus"></friend-contact>
+      <friend-contact v-for="friend in friends" :friend="friend" :key="friend.id" @toggle-favorite="toggleFavoriteStatus" @friend-deleted="deleteFriend"></friend-contact>
     </ul>
   </section>
 </template>
@@ -40,6 +41,21 @@ export default {
     toggleFavoriteStatus(friendId){
       const friend = this.friends.find(f => f.id === friendId);
       friend.isFavorite = !friend.isFavorite;
+    },
+    addFriend(addedFriend){
+      const friend = {
+        id: addedFriend.id,
+        name: addedFriend.name,
+        phone: addedFriend.phone,
+        email: addedFriend.email,
+        isFavorite: addedFriend.isFavorite
+      }
+      this.friends.push(friend);
+    },
+    deleteFriend(friendId){
+      // var friendIndex = this.friends.findIndex(friend => friend.id === friendId);
+      // this.friends.splice(friendIndex,1);
+      this.friends = this.friends.filter(f => f.id!==friendId);
     }
   }
 };
@@ -77,7 +93,8 @@ header {
   list-style: none;
 }
 
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -109,5 +126,18 @@ header {
   background-color: #ec3169;
   border-color: #ec3169;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+#app input {
+  font: inherit;
+  padding: 0.15rem;
+}
+#app label {
+  font-weight: bold;
+  margin-right: 1rem;
+  width: 7rem;
+  display: inline-block;
+}
+#app form div {
+  margin: 1rem 0;
 }
 </style>
