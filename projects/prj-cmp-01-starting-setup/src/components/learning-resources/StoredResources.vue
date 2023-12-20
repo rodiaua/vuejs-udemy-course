@@ -1,7 +1,7 @@
 <template>
     <ul>
         <learning-resource v-for="resource in resources" :key="resource.id" :title="resource.title"
-            :description="resource.description" :link="resource.link"></learning-resource>
+            :description="resource.description" :link="resource.link" :id="resource.id"></learning-resource>
     </ul>
 </template>
 
@@ -12,7 +12,7 @@ export default {
     components: {
         LearningResource
     },
-    props:['resources']
+    inject:['resources']
 }
 </script>
 
